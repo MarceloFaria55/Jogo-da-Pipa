@@ -1,0 +1,487 @@
+#include <allegro.h>
+#include<stdio.h>
+
+
+
+      
+
+
+
+int main()
+
+{
+    allegro_init();
+    install_timer();
+    install_keyboard();
+    set_color_depth(32);
+    set_window_title("Voando");
+
+    install_sound(DIGI_AUTODETECT, MIDI_AUTODETECT, NULL);
+    set_gfx_mode(GFX_AUTODETECT_WINDOWED,800,600,0,0);
+
+    int cx1 = 1800,cx2= 1800,cx3=1800,cx4=1800,cy1=20,cy2=50,cy3=100,cy4=300,b=10,ponto=0;
+    int x=155, y=5,W1,H1,NX=14,NY=13,NW=90,NH=30,cena=0,vida=3;
+    int i=0,v1=3,v2=2,v3=1,v4=1,v5=2,p=40;
+    int px1=800,py1=50;
+    int px2=800,py2=250;
+    int px3=800,py3=400;
+    int px4=400,py4=150;
+    int cx5=800,cy5=20,eu=1; 
+    BITMAP*  cenario = load_bitmap("UNITRI.bmp", NULL);
+
+    BITMAP* cima = load_bitmap("cima.bmp", NULL);
+    BITMAP* baixo = load_bitmap("baixo.bmp", NULL);
+    BITMAP* esquerda = load_bitmap("personagem.bmp", NULL);
+    BITMAP* direita = load_bitmap("direita.bmp", NULL);
+    BITMAP* boneco = load_bitmap("personagem.bmp", NULL);
+
+    BITMAP* nuvem = load_bitmap("nuvem.bmp", NULL);
+    BITMAP* nuvem2 = load_bitmap("nuvem2.bmp", NULL);
+    BITMAP* nuvem3 = load_bitmap("nuvem3.bmp", NULL);
+    BITMAP* nuvem4 = load_bitmap("sol1.bmp", NULL);
+
+    BITMAP* passaro = load_bitmap("passaro.bmp", NULL);
+    BITMAP* passaro1 = load_bitmap("passaro.bmp", NULL);
+    BITMAP* passaro2 = load_bitmap("passaro2.bmp", NULL);
+
+    BITMAP* passarob = load_bitmap("passarob.bmp", NULL);
+    BITMAP* passarob1 = load_bitmap("passarob.bmp", NULL);
+    BITMAP* passarob2 = load_bitmap("passarob2.bmp", NULL);
+
+    BITMAP* passaroc = load_bitmap("passaro3.bmp", NULL);
+    BITMAP* passaroc1 = load_bitmap("passaro3.bmp", NULL);
+    BITMAP* passaroc2 = load_bitmap("passarob3.bmp", NULL);
+    
+    BITMAP* passarod = load_bitmap("passaro3.bmp", NULL);
+    BITMAP* passarod1 = load_bitmap("passaro3.bmp", NULL);
+    BITMAP* passarod2 = load_bitmap("passarob3.bmp", NULL);
+
+    BITMAP* pipa = load_bitmap("pipa2.bmp", NULL);
+    BITMAP* pipa1 = load_bitmap("pipa1.bmp", NULL);
+    BITMAP* pipa2 = load_bitmap("pipa2.bmp", NULL);
+    BITMAP* pipa3 = load_bitmap("pipa3.bmp", NULL);
+    BITMAP* pipa4 = load_bitmap("pipa4.bmp", NULL);
+    BITMAP* pipa5 = load_bitmap("pipa5.bmp", NULL);
+    BITMAP* pipa6 = load_bitmap("pipa6.bmp", NULL);
+    BITMAP* fim = load_bitmap("gameover.bmp", NULL);
+
+    BITMAP* buffer = create_bitmap(800, 600);
+
+  //  SAMPLE *arru = load_sample("voz.wav");
+    SAMPLE *csol = load_sample("t.wav");
+    SAMPLE *pio = load_sample("voz.wav");
+    MIDI *menu = load_midi("NOVA.mid");
+    play_midi(menu, 0);
+
+      BITMAP* inicio = load_bitmap("ceu.bmp", NULL);
+ //   BITMAP* buffer = create_bitmap(800, 600);
+      draw_sprite(buffer,inicio,0,0);
+      draw_sprite(screen, buffer,0,0);
+      
+     
+     
+      while(!key[KEY_ENTER])
+      {
+      
+        
+        if(key[KEY_ESC])
+        {
+                        break;
+        }
+        
+        }
+      //  MIDI *mid = load_midi("Pacman.mid");
+     //   play_midi(mid, 0);
+      
+     
+   while(!key[KEY_ESC])
+   {
+        if(key[KEY_M])
+   {
+       destroy_midi(menu);  
+   }                
+        
+
+       
+         if(i==0)
+         {
+
+
+        draw_sprite(buffer,cenario,cena,0);
+        draw_sprite(buffer,boneco,b,350);
+        draw_sprite(buffer,pipa,x,y);
+
+        draw_sprite(buffer,nuvem,cx1,cy1);
+        if(cx1<-2000)
+        cx1=2000;
+        cx1-=4;
+//sol = nuvem 4
+        draw_sprite(buffer,nuvem4,cx5,cy5);
+        if(cx5<-850)
+        cx5=850;
+         cx5-=v5;
+        if(cx5>0 && cx5<=100  || cx5>300 && cx5<=400  || cx5>600 && cx5<=700)
+        { 
+              nuvem4 = load_bitmap("sol1.bmp", NULL);
+        }
+        if(cx5>100 && cx5<=200  || cx5>400 && cx5<=500  || cx5>700 && cx5<=750)
+         { 
+                nuvem4 = load_bitmap("sol2.bmp", NULL);
+         }
+        if(cx5>200 && cx5<=300  || cx5>500 && cx5<=600  || cx5> 750)
+        { nuvem4 = load_bitmap("sol3.bmp", NULL);}
+        
+        draw_sprite(buffer,nuvem2,cx3,cy3);
+        if(cx3<-2000)
+        cx3=2000;
+        cx3-=3;
+
+        draw_sprite(buffer,nuvem3,cx4,cy4);
+        if(cx4<-800)
+        cx4=800;
+        cx4-=3;
+       //passaro 1
+
+         draw_sprite(buffer,passaro,px1,py1);
+        if(px1<-2000)
+        px1=2000;
+        //px1-=3;
+
+        if(px1>100 && px1<=200  || px1>500 && px1<=600  || px1>700)  {    passaro=passaro1;py1=50;}
+        else{ passaro=passaro2;py1=100;}
+
+
+        //passaro 2
+
+        draw_sprite(buffer,passarob,px2,py2);
+        if(px2<-1400)
+        px2=1400;
+       // px2-=4;
+
+        if(px2>100 && px2<=200  || px2>500 && px2<=600  || px2>700){    passarob=passarob2;py2=200;}
+        else{ passarob=passarob1;py2=250;}
+
+
+         // passaro 3
+
+        draw_sprite(buffer,passaroc,px3,py3);
+        if(px3<-1600)
+        px3=1400;
+       // px3-=6;
+       
+       if(px3>100 && px3<=200  || px3>500 && px3<=600  || px3>700){
+                passaroc=passaroc1;
+                py3=300;}
+        else{
+           // play_sample(arru, 255,128,1000,0); 
+            passaroc=passaroc2;py3=350;}
+        //passaro 4
+        
+        
+        draw_sprite(buffer,passarod,px4,py4);
+        if(px4<-1600)
+        px4=1400;
+       // px3-=6;
+       
+       if(px4>100 && px4<=200  || px4>500 && px4<=600  || px4>700){    passarod=passarod1;py4=400;}
+        else{ passarod=passarod2;py4=450;}
+        
+        
+ //aumento de velocidade e aumento de levels   
+        
+        if(ponto>0 && ponto<=50) {v1=3;v2=2;v3=1;v4=1;eu=1;}
+        if(ponto>150 && ponto<=300){v1=4;v2=3;v3=2;v4=5;eu=2;}
+        if(ponto>300 && ponto<=500){v1=5;v2=7;v3=8;v4=9;eu=3;v5=3;}
+        if(ponto>500 && ponto<=700){v1=6;v2=8;v3=9;v4=10;eu=4;v5=4;}
+        if(ponto>700 && ponto<=1000){v1=10;v2=11;v3=12;v4=13;eu=5;v5=6;}
+        if(ponto>1000 && ponto<=1500){v1=14;v2=15;v3=16;v4=17;eu=6;v5=7;}
+        if(ponto>1500 && ponto<=2000){v1=16;v2=17;v3=20;v4=18;eu=7;}
+        if(ponto>2000 && ponto<=3000){v1=17;v2=18;v3=19;v4=20;eu=8;}
+        if(ponto>1500 && ponto<=2000){v1=18;v2=19;v3=22;v4=23;eu=9;}
+        if(ponto>1500 && ponto<=2000){v1=19;v2=20;v3=23;v4=24;eu=10;}
+         
+
+        //teclas
+        
+        if(key[KEY_A])
+        {
+                        cenario = load_bitmap("UNITRI2.bmp", NULL);
+        }
+        if(key[KEY_B])
+        {
+                        cenario = load_bitmap("praia.bmp", NULL);
+        }
+        if(key[KEY_C])
+        {
+                        cenario = load_bitmap("neve.bmp", NULL);
+        }
+       
+
+        if(key[KEY_UP])
+        {
+                         
+                        W1=30,H1=100;
+                        pipa=pipa2;y-=v5;boneco=cima;  b=10;
+                        if(y<-70)
+                        {
+                                 y=y+v5;
+                        }
+
+        }
+
+        if( key[KEY_LEFT] && key[KEY_UP] )
+        {
+                        W1=90,H1=90;
+            pipa=pipa3;x-=2;boneco=esquerda;b=20;
+             if(x<-60)
+                        {
+                                 x+=v5;
+                        }
+
+
+        }
+
+
+        if( key[KEY_RIGHT] && key[KEY_UP] )
+        {
+                          W1=90,H1=80;
+                         
+            pipa=pipa4;x+=v5;boneco=direita;b=0;
+            if(x>700)
+                        {
+                                 x-=v5;
+                        }
+        }
+
+
+        if(key[KEY_LEFT] && !key[KEY_UP])
+        {
+                        
+                          W1=100,H1=30;
+                         pipa=pipa5;x-=v5;boneco=esquerda;b=20;
+                         if(x<-60)
+                        {
+                                 x+=v5;
+                        }
+
+        }
+
+
+        if(key[KEY_RIGHT] && !key[KEY_UP])
+        {
+                          W1=100,H1=30;
+                          pipa=pipa6;x+=v5;boneco=direita;b=0;
+                          if(x>700)
+                        {
+                                 x-=v5;
+                        }
+
+        }
+
+
+        if(key[KEY_DOWN])
+        {
+                         W1=30,H1=90;
+                         pipa=pipa1;y+=v5;boneco=baixo;b=10;
+                         if(y>500)
+                        {
+                                 y-=v5;
+                        }
+
+        }
+        }else{
+           
+       //    destroy_sample(pio);
+           //destroy_midi(mid);
+           vida=0;
+           draw_sprite(buffer,fim,0,0);
+           draw_sprite(screen, buffer,0,0);
+           char txt[40];
+           sprintf(txt,"Pontos: %d Level: %d ", ponto, eu);
+           textout(screen,font,txt,205,305,makecol(0,255,0));
+           rest(20);
+          // clear(screen);
+          if(key[KEY_ENTER])
+          
+          {
+                i=0;
+     cx1 = 1800;cx2= 1800;cx3=1800;cx4=1800;cy1=20;cy2=50;cy3=100;cy4=300;b=10,ponto=0;
+     x=155; y=5;W1;H1;NX=14;NY=13;NW=90;NH=30;cena=0;vida=3;
+     i=0;v1=3;v2=2;v3=1;v4=1;v5=2;p=40;
+     px1=800;py1=50;
+     px2=800;py2=250;
+     px3=800;py3=400;
+     px4=400;py4=150;
+     cx5=800;cy5=20,eu=0;
+            }
+         }
+        draw_sprite(screen, buffer,0,0);
+
+        // cx5=40,cy5=50,fx5=210,fy5=100;
+
+        char txt[40];
+
+
+
+        //funções de colisão dos passaros
+       if((x>px1+NW) || (y>py1+NH)  || (x+W1<px1) || (y + H1<py1))
+       {
+               sprintf(txt,"Pontos: %d Level: %d Vidas: %d", ponto, eu,vida);
+               textout(screen,font,txt,5,5,makecol(0,255,0));
+                px1-=v1;
+                      
+                      }else
+                      {
+                           play_sample(pio, 255,128,1000,0);
+                            px1=800;
+                            vida--;
+                           if(vida==0)
+                           {
+                           i=1;
+                           sprintf(txt,"Pontos: %d Level: %d ", ponto, eu);
+                           textout(screen,font,txt,205,305,makecol(0,255,0));
+                        }
+                       }
+        if((x>px2+NW) || (y>py2+NH)  || (x+W1<px2) || (y + H1<py2))
+       {
+             sprintf(txt,"Pontos: %d Level: %d Vidas: %d", ponto, eu,vida);
+               textout(screen,font,txt,5,5,makecol(0,255,0));
+                px2-=v2;
+                      }else
+                      {
+                        play_sample(pio, 255,128,1000,0);
+                         px2=800;
+                            vida--;
+                           if(vida==0)
+                           {
+                         
+                         
+                          i=1;
+                           sprintf(txt,"Pontos: %d Level: %d ", ponto, eu);
+                            textout(screen,font,txt,205,305,makecol(0,255,0));
+                        }
+                       }
+
+         if((x>px3+NW) || (y>py3+NH)  || (x+W1<px3) || (y + H1<py3))
+       {
+               sprintf(txt,"Pontos: %d Level: %d Vidas: %d", ponto, eu,vida);
+               textout(screen,font,txt,5,5,makecol(0,255,0));
+                px3-=v3;
+                      }else
+                      {
+                    play_sample(pio, 255,128,1000,0);
+                     px3=800;
+                            vida--;
+                           if(vida==0)
+                           {
+                     
+                        i=1;
+                         sprintf(txt,"Pontos: %d Level: %d ", ponto, eu);
+                         textout(screen,font,txt,205,305,makecol(0,255,0));
+                          }
+                       }
+                       
+                       if((x>px4+NW) || (y>py4+NH)  || (x+W1<px4) || (y + H1<py4))
+       {
+               sprintf(txt,"Pontos: %d Level: %d Vidas: %d", ponto, eu,vida);
+               textout(screen,font,txt,5,5,makecol(0,255,0));
+                px4-=v4;
+                      }else
+                      {
+                           play_sample(pio, 255,128,1000,0);
+                            px4=800;
+                            vida--;
+                           if(vida==0)
+                           {
+                        i=1;
+                         sprintf(txt,"Pontos: %d Level: %d ", ponto, eu);
+                           textout(screen,font,txt,205,305,makecol(0,255,0));
+            }
+                       }
+
+                       //colisão do sol
+        if((x>cx5+115) || (y>cy5+90)  || (x+W1<cx5) || (y + H1<cy5))
+       {
+
+                           sprintf(txt,"Pontos: %d Level: %d Vidas: %d", ponto, eu,vida);
+                           textout(screen,font,txt,5,5,makecol(0,255,0));
+
+
+                      }else
+                      {
+                             play_sample(csol, 255,128,1000,0);
+                          sprintf(txt,"Pontos: %d Level: %d ", ponto, eu);
+                          textout(screen,font,txt,5,5,makecol(0,255,0));
+                           ponto+=10;
+                           cy5*=3;
+                           cy3*=3;
+                           cy2*3;
+                           if(cy5<0)
+                           {
+                                      cy5=20;
+                                      
+                                      cx5=850;
+                           }
+                           if(cy5>800)
+                           {
+                                      cy5=50;
+                                      cx5=850;
+                           }
+                          
+                       }
+        
+        rest(20);
+        clear(buffer);
+        
+      
+   }
+
+    destroy_bitmap(buffer);
+    destroy_bitmap(inicio);
+   
+    destroy_bitmap(nuvem);
+    destroy_bitmap(nuvem2);
+    destroy_bitmap(nuvem3);
+    destroy_bitmap(nuvem4);
+  
+    destroy_bitmap(passaro);
+    destroy_bitmap(passaro1);
+    destroy_bitmap(passaro2);
+   
+    destroy_bitmap(passarob);
+    destroy_bitmap(passarob1);
+    destroy_bitmap(passarob2);
+   
+    destroy_bitmap(passaroc);
+    destroy_bitmap(passaroc1);
+    destroy_bitmap(passaroc2);
+
+    destroy_bitmap(passarod);
+    destroy_bitmap(passarod1);
+    destroy_bitmap(passarod2);
+   
+    destroy_bitmap(cenario);
+  
+    destroy_bitmap(boneco);
+    destroy_bitmap(cima);
+    destroy_bitmap(baixo);
+    destroy_bitmap(esquerda);
+    destroy_bitmap(direita);
+    destroy_bitmap(pipa);
+    destroy_bitmap(pipa1);
+    destroy_bitmap(pipa3);
+    destroy_bitmap(pipa4);
+    destroy_bitmap(pipa2);
+    destroy_bitmap(pipa5);
+    destroy_bitmap(pipa6);
+    destroy_bitmap(fim);
+    destroy_sample(pio);
+    
+    destroy_sample(csol);
+    
+ 
+   // destroy_midi(mid);
+  return 0;
+clear(screen);
+}
+END_OF_MAIN();
